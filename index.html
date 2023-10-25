@@ -6,7 +6,20 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="buttons">
+        <button id = "btn-rock" type = "button">Rock</button>
+        <button id = "btn-paper" type = "button">Paper</button>
+        <button id = "btn-scissors" type = "button">Scissors</button>
+    </div>
     <script>
+
+        //Created variables that can call the buttons from the html
+
+        const btnRock = document.querySelector('#btn-rock');
+        const btnPaper = document.querySelector('#btn-paper');
+        const btnScissors = document.querySelector('#btn-scissors');
+
+        //function that gets computer selection using random number from 0,1, or 2
 
         function getComputerChoice(){
             
@@ -21,18 +34,19 @@
             }
         }
 
-        function getPlayerChoice(){
+        // function getPlayerChoice(){
             
-            return prompt("Rock, paper, or scissors").toLowerCase();
-        }
+        // }
 
         let playerScore = 0;
         let computerScore = 0;
 
+        // Plays one round of game compares selections from both computer and player and outputs the correct message
+
         function playRound(playerSelection, computerSelection){
 
-            playerSelection = getPlayerChoice();
-            computerSelection = getComputerChoice()
+            // playerSelection = getPlayerChoice();
+            // computerSelection = getComputerChoice()
 
             if(playerSelection == "rock" && computerSelection == "rock"){
                 return "Draw, you both chose rock!";
@@ -57,14 +71,9 @@
             }
 
         }
-        console.log(playRound())
+        // console.log(playRound())
 
         function game(){
-            
-            console.log(playRound())
-            console.log(playRound())
-            console.log(playRound())
-            console.log(playRound())
 
             if(playerScore > computerScore){
                 return "Game Over You Won"
@@ -74,8 +83,35 @@
 
         }
 
-        console.log(game())
-        console.log(playerScore)
+        // console.log(game())
+        // console.log(playerScore)
+
+        //When rock is clicked, player selection will output rock, and play round function will be called.
+
+        btnRock.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            const playerSelection = 'rock';
+            playRound(playerSelection, computerSelection)
+            console.log(playRound(playerSelection, computerSelection))
+        });
+
+        //When paper is clicked, player selection will output paper, and play round function will be called.
+
+        btnPaper.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            const playerSelection = 'paper';
+            playRound(playerSelection, computerSelection)
+            console.log(playRound(playerSelection, computerSelection))
+        });
+
+        //When scissors is clicked, player selection will output scissors, and play round function will be called.
+
+        btnScissors.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            const playerSelection = 'scissors';
+            playRound(playerSelection, computerSelection)
+            console.log(playRound(playerSelection, computerSelection))
+        });
 
     </script>
 </body>
