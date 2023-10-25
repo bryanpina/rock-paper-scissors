@@ -11,14 +11,33 @@
         <button id = "btn-paper" type = "button">Paper</button>
         <button id = "btn-scissors" type = "button">Scissors</button>
     </div>
+
+    <div class = "results">
+
+    </div>
+    <div class = "running-score">
+
+    </div>
+
+    <div class = "final-message">
+
+    </div>
     <script>
+
+        //Running score of player and computer
+
+        let playerScore = 0;
+        let computerScore = 0;
 
         //Created variables that can call the buttons from the html
 
         const btnRock = document.querySelector('#btn-rock');
         const btnPaper = document.querySelector('#btn-paper');
         const btnScissors = document.querySelector('#btn-scissors');
-
+        const results = document.querySelector('.results');
+        const runningScore = document.querySelector('.running-score');
+        const finalMessage = document.querySelector('.final-message');
+        
         //function that gets computer selection using random number from 0,1, or 2
 
         function getComputerChoice(){
@@ -34,65 +53,58 @@
             }
         }
 
-        // function getPlayerChoice(){
-            
-        // }
-
-        let playerScore = 0;
-        let computerScore = 0;
-
         // Plays one round of game compares selections from both computer and player and outputs the correct message
 
         function playRound(playerSelection, computerSelection){
 
-            // playerSelection = getPlayerChoice();
-            // computerSelection = getComputerChoice()
-
             if(playerSelection == "rock" && computerSelection == "rock"){
-                return "Draw, you both chose rock!";
+                results.textContent = "Draw, you both chose rock!";
             } else if (playerSelection == "rock" && computerSelection == "paper"){
-                computerScore++; return "You lose! Your opponent chose paper.";
+                computerScore++; results.textContent = "You lose! Your opponent chose paper.";
             } else if (playerSelection == "rock" && computerSelection == "scissors"){
-                playerScore++; return "You win! Your opponent chose scissors.";
+                playerScore++; results.textContent = "You win! Your opponent chose scissors.";
             } else if (playerSelection == "paper" && computerSelection == "rock"){
-                playerScore++; return "You win! Your opponent chose rock.";
+                playerScore++; results.textContent = "You win! Your opponent chose rock.";
             } else if (playerSelection == "paper" && computerSelection == "paper"){
-                return "Draw, you both chose paper.";
+                results.textContent = "Draw, you both chose paper.";
             } else if (playerSelection == "paper" && computerSelection == "scissors"){
-                computerScore++; return "You lose! Your opponent chose scissors.";
+                computerScore++; results.textContent = "You lose! Your opponent chose scissors.";
             } else if (playerSelection == "scissors" && computerSelection == "rock"){
-                computerScore++; return "You lost! Your opponent chose rock.";
+                computerScore++; results.textContent = "You lost! Your opponent chose rock.";
             } else if (playerSelection == "scissors" && computerSelection == "paper"){
-                playerScore++; return "You win! Your opponent chose paper.";
+                playerScore++; results.textContent = "You win! Your opponent chose paper.";
             } else if (playerSelection == "scissors" && computerSelection == "scissors"){
                 return "Draw, you both chose scissors"
             } else {
-                return "Invalid entry, please try again."
-            }
-
-        }
-        // console.log(playRound())
-
-        function game(){
-
-            if(playerScore > computerScore){
-                return "Game Over You Won"
-            } else {
-                return "Game Over You Lost"
+                results.textContent = "Invalid entry, please try again."
             }
 
         }
 
-        // console.log(game())
-        // console.log(playerScore)
+        //Displays running score for player and computer
+
+        function score(){
+            runningScore.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
+        }
+
+        //Displays winning or losing message and resets scores to zero
+
+        function winnerLoserMessage(){
+            if(playerScore > computerScore && playerScore === 5){
+                finalMessage.textContent = "Game Over, You won!"; playerScore = 0; computerScore = 0;
+            } else if(computerScore > playerScore && computerScore === 5){
+                finalMessage.textContent = "Game Over, You Lost!"; playerScore = 0; computerScore = 0;
+            }
+        }
 
         //When rock is clicked, player selection will output rock, and play round function will be called.
 
         btnRock.addEventListener('click', () => {
             const computerSelection = getComputerChoice();
             const playerSelection = 'rock';
-            playRound(playerSelection, computerSelection)
-            console.log(playRound(playerSelection, computerSelection))
+            playRound(playerSelection, computerSelection);
+            score();
+            winnerLoserMessage()
         });
 
         //When paper is clicked, player selection will output paper, and play round function will be called.
@@ -100,8 +112,9 @@
         btnPaper.addEventListener('click', () => {
             const computerSelection = getComputerChoice();
             const playerSelection = 'paper';
-            playRound(playerSelection, computerSelection)
-            console.log(playRound(playerSelection, computerSelection))
+            playRound(playerSelection, computerSelection);
+            score();
+            winnerLoserMessage()
         });
 
         //When scissors is clicked, player selection will output scissors, and play round function will be called.
@@ -109,8 +122,9 @@
         btnScissors.addEventListener('click', () => {
             const computerSelection = getComputerChoice();
             const playerSelection = 'scissors';
-            playRound(playerSelection, computerSelection)
-            console.log(playRound(playerSelection, computerSelection))
+            playRound(playerSelection, computerSelection);
+            score();
+            winnerLoserMessage()
         });
 
     </script>
